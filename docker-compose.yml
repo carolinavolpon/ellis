@@ -1,0 +1,23 @@
+# docker-compose.yml
+# Define a versão do formato do arquivo Docker Compose. '3.8' é uma versão moderna e estável.
+version: '3.8'
+
+# Define os serviços (contêineres) que compõem sua aplicação.
+services:
+  # O nome do nosso serviço. Você pode escolher qualquer nome, 'api' é descritivo.
+  api:
+    # Instrui o Compose a construir uma imagem usando o Dockerfile na raiz do projeto_no diretório atual ('.').
+    # Ele irá utilizar o seu Dockerfile existente.
+    build: .
+    container_name: api # nome do container
+    # Mapeia a porta 8000 do seu computador (host) para a porta 8000 do contêiner.
+    # Isso permite que você acesse a API em http://localhost:8000.
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual ('.') do host no diretório '/app' do contêiner.
+    # Isso cria um vínculo entre os arquivos: qualquer alteração no seu código local
+    # será refletida instantaneamente dentro do contêiner, o que é ótimo para desenvolvimento.
+    # O banco de dados 'escola.db' também será salvo no seu diretório local, persistindo os dados.
+    volumes:
+      - .:/app # Monta o diretório atual (onde está seu código) 
+
